@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package video;
+
+option go_package = "./videogrpc";
+
+message vidoeCreateRequest {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message videoCreateResponse {
+    string filename = 1;
+}
+
+message videoGetRequest {
+    string filename = 1;
+}
+message videoGetResponse {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message videoDeleteRequest {
+    string filename = 1;
+}
+
+message videoDeleteResponse {
+    bool deleted = 1;
+}
+
+service video {
+    rpc createvideo(vidoeCreateRequest) returns (videoCreateResponse);
+    rpc getvideo(videoGetRequest) returns (videoGetResponse);
+    rpc deletevideo(videoDeleteRequest) returns (videoDeleteResponse);
+}

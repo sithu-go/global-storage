@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package image;
+
+option go_package = "./image";
+
+message imageCreateRequest {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message imageResponse {
+    string filename = 1;
+}
+
+message imageGetRequest {
+    string filename = 1;
+}
+message imageGetResponse {
+    bytes fileData = 1;
+    string ext = 2;
+}
+
+message imageDeleteRequest {
+    string filename = 1;
+}
+
+message imageDeleteResponse {
+    bool deleted = 1;
+}
+
+service image {
+    rpc createImage(imageCreateRequest) returns (imageResponse);
+    rpc getImage(imageGetRequest) returns (imageGetResponse);
+    rpc deleteImage(imageDeleteRequest) returns (imageDeleteResponse);
+}
